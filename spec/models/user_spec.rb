@@ -153,12 +153,12 @@ RSpec.describe User, type: :model do
       end
 
       it "パスワードは、全角文字では登録できないこと" do
-        @user.password = "ABCDEF"
-        @user.password_confirmation = "ABCDEF"
+        @user.password = "ＡＢｃｄ１２"
+        @user.password_confirmation = "ＡＢｃｄ１２"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password には半角６文字以上、大文字、小文字、英数字を混ぜてください")
       end
-
+      
     end
   end
 end
