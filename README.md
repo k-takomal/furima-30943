@@ -1,6 +1,6 @@
 # README
 
-## userテーブル
+## usersテーブル
 
 | column          | type   | options     |
 | --------------- | ------ | ----------- |
@@ -13,37 +13,54 @@
 | first_name_kana | string | null; false |
 | birthday        | date   | null; false |
 
+### Association
+- has_many :items
+- has_many :orders
 
-## itemテーブル
 
-| column      | type       | options     |
-| ----------- | ---------- | ----------- |
-| name        | string     | null; false |
-| text        | text       | null; false |
-| category    | integer    | null; false |
-| condition   | integer    | null; false |
-| postage     | integer    | null; false |
-| area        | integer    | null; false |
-| days        | integer    | null; false |
-| price       | integer    | null; false |
-| user        | references |             |
+## itemsテーブル
+
+| column       | type       | options     |
+| ------------ | ---------- | ----------- |
+| name         | string     | null; false |
+| text         | text       | null; false |
+| category_id  | integer    | null; false |
+| condition_id | integer    | null; false |
+| postage_id   | integer    | null; false |
+| area_id      | integer    | null; false |
+| days_id      | integer    | null; false |
+| price        | integer    | null; false |
+| user         | references |             |
+
+### Association
+- belongs_to :user
+- has_one :order
 
 
 ## addressテーブル
 
 | column        | type      | options     |
 | ------------- | --------- | ----------- |
-| postal_code   | integer   | null; false |
-| area          | integer   | null; false |
+| postal_code   | string    | null; false |
+| area_id       | integer   | null; false |
 | cities        | string    | null; false |
 | house_number  | string    | null; false |
 | building_name | string    |             |
-| tel           | integer   | null; false |
-| user          | reference |             |
+| tel           | string    | null; false |
+| order         | reference |             |
+
+### Association
+- belongs_to :order
 
 
 ## ordersテーブル
 | column  | type       | options     |
 | ------- | ---------- | ----------- |
-| item    | references |  
-| address | references |
+| item    | references |             |
+| user    | references |             |
+| address | reference  |             | 
+
+### Association
+- belongs_to :item
+- belongs_to :user
+- has_one :address
