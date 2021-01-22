@@ -5,10 +5,10 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item, url:new_item_path, local: true do |f| %>
+    <%= form_with model: @item, local: true do |f| %>
 
     <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-    <%# render 'shared/error_messages', model: f.object %>
+    <%=render 'shared/error_messages', model: f.object%>
     <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
 
     <%# 出品画像 %>
@@ -99,12 +99,14 @@
             <span class="indispensable">必須</span>
           </div>
           <span class="sell-yen">¥</span>
-          <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
+          <%= f.text_field :price, class:"price-input", id:"item-price",placeholder:"例）300" %>
         </div>
         <div class="price-content">
           <span>販売手数料 (10%)</span>
           <span>
-            <span id='add-tax-price'><%=%></span>円
+            <span id='add-tax-price'>
+
+            </span>円
           </span>
         </div>
         <div class="price-content">
@@ -157,3 +159,16 @@
     </p>
   </footer>
 </div>
+ <script language="javascript" type="text/javascript">
+
+let input = document.getElementById("item-price");
+input.onkeyup = printKey;
+
+  function printKey(){
+ let inputValue = input.value;
+ 
+  document.getElementById('add-tax-price').innerHTML = Math.floor(inputValue*0.1);
+
+  document.getElementById('profit').innerHTML =inputValue - Math.floor(inputValue*0.1);
+  }
+</script>
