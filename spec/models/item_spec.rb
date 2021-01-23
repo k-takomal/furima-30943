@@ -82,12 +82,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not a number")
       end
       it "価格が、¥300 以下" do
-        @item.price = "299"
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be greater than 299")
       end
       it "価格が、¥9,999,999 以上" do
-        @item.price = "10000000"
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than 10000000")
       end
@@ -103,6 +103,11 @@ RSpec.describe Item, type: :model do
       end
       it "販売価格が半角数字以外（全角数字）" do
         @item.price = "３００"
+        @item.valid?
+        expect(@item.errors.full_messages).to include( "Price is not a number")
+      end
+      it "販売価格が半角数字以外（半角英数混合）" do
+        @item.price = "300en"
         @item.valid?
         expect(@item.errors.full_messages).to include( "Price is not a number")
       end

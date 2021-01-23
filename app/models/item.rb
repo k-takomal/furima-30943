@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
    
-  validates :name,:text,:price,:category_id,:condition_id,:postage_id,:area_id,:day_id, :image,presence: true
+  validates :name,:text,:price, :image,presence: true
 
   validates :name,length:{maximum: 40}
   validates :text,length:{maximum: 1000}
