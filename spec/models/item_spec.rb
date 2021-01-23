@@ -21,6 +21,7 @@ RSpec.describe Item, type: :model do
       @item.text = "a"*1000
       expect(@item).to be_valid
       end
+      
     end
 
     context '商品出品がうまく行かないとき' do
@@ -83,12 +84,12 @@ RSpec.describe Item, type: :model do
       it "価格が、¥300 以下" do
         @item.price = "299"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than 300")
+        expect(@item.errors.full_messages).to include("Price must be greater than 299")
       end
       it "価格が、¥9,999,999 以上" do
         @item.price = "10000000"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than 9999999")
+        expect(@item.errors.full_messages).to include("Price must be less than 10000000")
       end
       it "販売価格が半角数字以外（英字）" do
         @item.price = "aaa"

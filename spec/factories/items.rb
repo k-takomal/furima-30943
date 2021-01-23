@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :item do
-  name {Faker::Book.title}
+  name {Faker::Name.last_name}
   text {Faker::Quotes::Shakespeare.hamlet_quote}
   category_id {rand(1..10)}
   condition_id {rand(1..10)}
