@@ -16,6 +16,6 @@ class Item < ApplicationRecord
   validates :text,length:{maximum: 1000}
   validates :price, numericality:{greater_than: 300,less_than: 9999999}
 
-  validates :category_id,:condition_id,:postage_id,:area_id,:day_id,numericality:{ othre_than: 0}
+  validates :category_id,:condition_id,:postage_id,:area_id,:day_id,numericality:{ other_than: 0}
 
 end
