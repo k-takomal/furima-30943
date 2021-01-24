@@ -1,5 +1,5 @@
 
-if(document.URL.match("/items/new")){
+if(document.URL.match("/items/new") || document.URL.match("/edit")){
 
 function check(){
 let input = document.getElementById("item-price");
