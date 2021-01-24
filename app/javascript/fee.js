@@ -1,3 +1,6 @@
+
+if(document.URL.match("/items/new")){
+
 function check(){
 let input = document.getElementById("item-price");
 input.onkeyup = printKey;
@@ -11,3 +14,4 @@ input.onkeyup = printKey;
   }
 };
 setInterval(check,1000)
+ }
