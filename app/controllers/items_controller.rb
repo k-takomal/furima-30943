@@ -42,11 +42,14 @@ def update
 end
 
 def destroy
+  if current_user.id != @item.user_id
+    redirect_to root_path
+  end
   
   if @item.destroy
     redirect_to root_path
   else 
-    render item_path(@item)
+    render :show
   end
 
 end
