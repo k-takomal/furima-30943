@@ -21,18 +21,19 @@ def create
 end
 
 def show
-  # @item = Item.find(params[:id])
 end
 
 def edit
-  # @item = Item.find(params[:id])
   if current_user.id != @item.user_id
     redirect_to root_path
   end
 end
 
 def update
-  # @item = Item.find(params[:id])
+  if current_user.id != @item.user_id
+    redirect_to root_path
+  end
+
   if @item.update(item_params)
     redirect_to item_path(@item)
   else
