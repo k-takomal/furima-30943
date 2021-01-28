@@ -14,4 +14,4 @@ input.onkeyup = printKey;
   }
 };
 setInterval(check,1000)
- }
+}
