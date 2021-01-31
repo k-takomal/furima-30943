@@ -2,20 +2,21 @@ class OrdersController < ApplicationController
 
   def index
      @item = Item.find(params[:item_id])
-     @order = Order.new
+     @item_address = ItemAddress.new
   end
 
   def create
     @item = Item.find(params[:item_id])
-    @order= Order.new(order_params)
-      if @order.valid?
-        pay_item
-        @order.save
-        return redirect_to "/items/#{params[:item_id]}"
-      else
-        render :index
-      end
+    @item_address = ItemAddress.new(order_params)
+    binding.pry
+    if @item_address.valid? 
+      pay_item
+      @item_address.save
+      return redirect_to "/items/#{params[:item_id]}"
+    else
+      render :index
     end
+  end
     
     private
 
@@ -29,9 +30,8 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit().merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
+      params.require(:item_address).permit(:postal_code,:area_id,:cities,:house_number,:building_name,:tel).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token] )
     end
-    
+
   end
-  # .permit(:postal_code,:area,:cities,:house_number,:building_name,:tel)
   
