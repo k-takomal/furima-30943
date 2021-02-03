@@ -1,14 +1,14 @@
 class ItemAddress
   include ActiveModel::Model
-  attr_accessor :postal_code,:area_id,:cities,:house_number,:building_name,:tel,:token,:order_id,:user_id,:item_id
+  attr_accessor :postal_code,:area_id,:cities,:house_number,:building_name,:tel,:token,:order,:order_id,:user_id,:item_id
 
-  with_options presence: true do
-    validates :postal_code, format:{with: /\A\d{3}[-]\d{4}\z/, message: "はハイフン（-）を含めてください"}
+  with_options presence:true do   
+    validates :postal_code,  format:{with: /\A\d{3}[-]\d{4}\z/, message: "はハイフン（-）を含めた７桁の半角数字にしてください"}
     validates :area_id, numericality:{ other_than: 0} 
     validates :cities, format:{with: /\A[ぁ-んァ-ン一-龥々]/, message: "は日本語入力してください"}
-    validates :house_number
+    validates :house_number, presence:true
     
-    validates :tel ,format:{with: /0\d{9,10}/,message: "はハイフンなしで記入してください"} 
+    validates :tel ,format:{with: /0{1}\d{9,10}/,message: "はハイフンなしの０から始まる１０〜１１桁の半角数字で記入してください"} 
     validates :token
 
   end 
