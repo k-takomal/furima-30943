@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  # before_action :move_to_index, only:[:index] 
  
 
   def index
@@ -9,9 +8,7 @@ class OrdersController < ApplicationController
 
         redirect_to root_path
       end
-      # if 
-      #   redirect_to root_path
-      # end
+      
   end
 
   def create
@@ -41,12 +38,6 @@ class OrdersController < ApplicationController
       params.require(:item_address).permit(:postal_code,:area_id,:cities,:house_number,:building_name,:tel).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token] )
     end
 
-  #   def move_to_index
-  #     # @item = Item.find(params[:item_id])
-  #     if current_user.id == @item.user_id
-  #     # if @item.order.id.present?
-  #       redirect_to "/items/index"
-  #   end
-  # end
+ 
   end
   
