@@ -10,6 +10,8 @@ class ItemAddress
     
     validates :tel ,format:{with: /0{1}\d{9,10}/,message: "はハイフンなしの０から始まる１０〜１１桁の半角数字で記入してください"} 
     validates :token
+    validates :user_id
+    validates :item_id
 
   end 
 

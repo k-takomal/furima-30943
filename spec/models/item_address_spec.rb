@@ -5,8 +5,8 @@ RSpec.describe ItemAddress, type: :model do
     @user1 = FactoryBot.create(:user)
     @user2 = FactoryBot.create(:user)
     @item1 = FactoryBot.create(:item)
-    @order = Order.create(user_id: @user1.id,item_id: @item1.id)
-    @address = FactoryBot.build(:item_address,order:@order)
+    @order = Order.create()
+    @address = FactoryBot.build(:item_address,order:@order,user_id: @user1.id,item_id: @item1.id)
     sleep(1)
   end
   
@@ -18,6 +18,10 @@ RSpec.describe ItemAddress, type: :model do
       it "必要な情報を適切に入力すると、商品の購入ができる" do
         expect(@address).to be_valid
       end
+      it "建物名がなくても商品の購入ができる" do
+        @address.building_name = ""
+        expect(@address).to be_valid
+      end
     end
     
     context "商品が購入できないとき" do
@@ -26,6 +30,16 @@ RSpec.describe ItemAddress, type: :model do
       @address.token = nil
       @address.valid? 
       expect(@address.errors.full_messages).to include("Token can't be blank")
+      end
+      it "user_idがない"do
+      @address.user_id = nil
+      @address.valid? 
+      expect(@address.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idがない"do
+      @address.item_id = nil
+      @address.valid? 
+      expect(@address.errors.full_messages).to include("Item can't be blank")
       end
       
       it "郵便番号が入力されていない"do
@@ -125,6 +139,11 @@ RSpec.describe ItemAddress, type: :model do
 
       it "電話番号が全角数字で書かれている（０１２３４５６７８９０）"do
       @address.tel = "０１２３４５６７８９０"
+      @address.valid?
+      expect(@address.errors.full_messages).to include("Tel はハイフンなしの０から始まる１０〜１１桁の半角数字で記入してください")
+      end
+      it "電話番号が英数混合で書かれている"do
+      @address.tel = "0123abc456"
       @address.valid?
       expect(@address.errors.full_messages).to include("Tel はハイフンなしの０から始まる１０〜１１桁の半角数字で記入してください")
       end

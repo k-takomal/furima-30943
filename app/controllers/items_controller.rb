@@ -24,7 +24,7 @@ def show
 end
 
 def edit
-  if current_user.id != @item.user_id
+  if current_user.id != @item.user_id || @item.order_ids.present?
     redirect_to root_path
   end
 end

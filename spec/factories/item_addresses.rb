@@ -4,6 +4,7 @@ FactoryBot.define do
       area_id {rand(1..47)}
       cities {'千代田区'}
       house_number {'青山−１−１'}
+      building_name {'森ビル'}
       tel {Faker::Number.leading_zero_number(digits: 10)}
      
        token {'sampletokensampletoken'}
