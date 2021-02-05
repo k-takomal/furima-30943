@@ -5,11 +5,10 @@ class Item < ApplicationRecord
   belongs_to :postage
   belongs_to :area
   belongs_to :day
-  
 
   belongs_to :user
   has_one_attached :image
-   
+  has_many :orders 
   validates :name,:text,:price, :image,presence: true
 
   validates :name,length:{maximum: 40}
