@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
- before_action :item_params 
+  before_action :authenticate_user!
+  before_action :item_params 
 
   def index
      @item_address = ItemAddress.new
